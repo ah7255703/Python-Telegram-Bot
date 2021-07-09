@@ -15,7 +15,6 @@ bottle-websocket==0.2.9
 bs4==0.0.1
 cachetools==4.2.2
 catch==0.1.0
-catfish==1.4.13
 certifi==2021.5.30
 chardet==4.0.0
 click==7.1.2
