@@ -66,6 +66,6 @@ def main():
     Bot_dispatcher.add_handler(CommandHandler('userinfo',suggestions_command))
     Bot_dispatcher.add_handler(MessageHandler(Filters.text,message_handler))
     Bot_dispatcher.add_error_handler(error_Functiuon)
-    Bot_updater.start_polling(10)
+    Bot_updater.start_polling()
     Bot_updater.idle()
 main()
