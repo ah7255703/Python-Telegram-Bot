@@ -12,7 +12,6 @@ avideo-dl==0.1.2
 beautifulsoup4==4.9.3
 bottle==0.12.19
 bottle-websocket==0.2.9
-Brlapi==0.6.6
 bs4==0.0.1
 cachetools==4.2.2
 catch==0.1.0
