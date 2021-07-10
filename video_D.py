@@ -9,8 +9,8 @@ def Video_D(url):
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.5',
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Origin': 'http://www.getfvid.com','Alt-Used': 'www.getfvid.com','Connection': 'keep-alive',
-        'Referer': 'http://www.getfvid.com/','Upgrade-Insecure-Requests': '1','Pragma': 'no-cache','Cache-Control': 'no-cache','TE': 'Trailers',}
+        'Origin': 'https://www.getfvid.com','Alt-Used': 'www.getfvid.com','Connection': 'keep-alive',
+        'Referer': 'https://www.getfvid.com/','Upgrade-Insecure-Requests': '1','Pragma': 'no-cache','Cache-Control': 'no-cache','TE': 'Trailers',}
 
     # Validating The Video Url 
     valid = validators.url(url)
@@ -19,7 +19,7 @@ def Video_D(url):
     else:
         isValid = False
     # requesting the server to get markup response
-    response = requests.post('http://www.getfvid.com/downloader', headers=headers,data={'url': url}).content
+    response = requests.post('https://www.getfvid.com/downloader', headers=headers,data={'url': url}).content
     soup = BeautifulSoup(response,'html.parser')
     # if the video Private or not 
     alert = soup.select_one('.alert')
