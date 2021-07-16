@@ -1,7 +1,8 @@
-import video_D , validators
-import os 
+import validators
+import os ,re , requests
 from os import environ
 from telegram.ext import *
+
 API_KEY = environ['API_KEY']
 print("Bot Started....")
 def userinfo(update,context):
@@ -18,46 +19,33 @@ def userinfo(update,context):
           _______________________________________
           """.format(messager_id,messager_Fname,messager_Lname,messager_Username)
     return info
-#<start> commands Functions 
 def start_command(update,context):
     update.message.reply_text(' Hello {}\n, Send Facebook Video Link to start Downloading !'.format(update.message.chat.first_name))
 def help_command(update,context):
     update.message.reply_text('This Bot can Bring you Download Link for facebook Video \n ,if url was given ')
 def suggestions_command(update,context):
     userinfo(update,context)
-#<End> command functions 
 
-#<start> error function 
 def error_Functiuon(update,context):
     print("update {} caused error {}".format(update,context.error))
-#<End> error function 
 
 
-
-
-
-
-
-#<start> message handler
 def message_handler(update,context):
     message_text = update.message.text
-    MSG = message_text.strip()
-    print('The message: {}'.format(MSG),userinfo(update,context))
-    if validators.url(MSG) == False : 
-        update.message.reply_text('{} Not Valid Url , Try Valid one '.format(message_text))
+    print('-' * 30)
+    print(userinfo(update,context))
+    print(message_text)
+    print('-' * 30)
+    isvalid = validators.url(message_text.strip())
+    if isvalid == True:
+        req = requests.get(message_text.strip()).text
+        sd_video_Link = re.search('sd_src:"(.+?)"',req)
+        update.message.reply_text(sd_video_Link)
     else:
-        Dict = video_D.Video_D(MSG)
-        update.message.reply_text('The requested Video is : {} \n and the Link : {}'.format(Dict['Title'],Dict['D_Links'][0])),
-        update.message.reply_text('and the audio format  : {}'.format(Dict['D_Links'][1]))
+        update.message.reply_text('Link is not Valid or the requested video is private !')
+    
+
         
- 
- 
- 
- 
- 
- 
-            
-#<End> message 
 def main():
     Bot_updater = Updater(API_KEY,use_context=True)
     Bot_dispatcher = Bot_updater.dispatcher
